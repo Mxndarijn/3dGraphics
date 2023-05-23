@@ -17,6 +17,7 @@ GameObject::~GameObject()
 void GameObject::addComponent(std::shared_ptr<Component> component)
 {
 	component->setGameObject(this);
+	component->init();
 	components.push_back(component);
 
 	if (drawComponent == nullptr) {

@@ -7,20 +7,19 @@ class BoxComponent :
     public DrawComponent
 {
 public:
-    BoxComponent(float xLength, float yLength, float zLength);
+    BoxComponent(glm::vec3 transform, Texture* texture = nullptr, int textureMultiValue = 0);
     ~BoxComponent();
 
-    void drawPlaneTexture();
-    void drawPlaneColor();
+    void drawBoxTexture();
+    void drawBoxColor();
 
     void draw() override;
 
     inline void setColor(glm::vec4 color) { this->color = color; }
 
 protected:
-    float xLength;
-    float yLength;
-    float zLength;
+    int textureMulti;
+    glm::vec3 transform;
     Texture* texture;
     glm::vec4 color;
 

@@ -11,7 +11,6 @@ public:
 	void generateNewColor();
 	void draw();
 	void update(float elapsedTime);
-protected:
 	std::shared_ptr<GameObject> object;
 };
 

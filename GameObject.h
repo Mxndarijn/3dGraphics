@@ -5,6 +5,7 @@
 #include <list>
 #include <memory>
 #include "BoundingBoxComponent.h"
+#include <iostream>
 
 class Component;
 class DrawComponent;

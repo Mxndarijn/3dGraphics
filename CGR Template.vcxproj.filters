@@ -64,7 +64,13 @@
       <Filter>components</Filter>
     </ClCompile>
     <ClCompile Include="BoxComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceComponent.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityComponent.cpp">
+      <Filter>components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,10 +110,19 @@
     <ClInclude Include="Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoxComponent.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
     <ClInclude Include="CameraComponent.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoxComponent.h">
+    <ClInclude Include="ForceComponent.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <glm/gtc/matrix_transform.hpp>
 
 class FloorTile;
 
@@ -14,6 +15,8 @@ public:
 	FloorManager(int width, int heigt);
 	~FloorManager();
 	void draw();
+	glm::vec3 getCenterPoint();
+
 
 
 };

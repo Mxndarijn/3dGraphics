@@ -163,7 +163,9 @@
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="FloorManager.cpp" />
     <ClCompile Include="FloorTile.cpp" />
+    <ClCompile Include="ForceComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaneComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
@@ -180,7 +182,10 @@
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="FloorManager.h" />
     <ClInclude Include="FloorTile.h" />
+    <ClInclude Include="ForceComponent.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="PlaneComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="stb_image.h" />

@@ -8,6 +8,7 @@
 #include "CameraComponent.h"
 #include "FloorTile.h"
 #include "PlaneComponent.h"
+#include "GravityComponent.h"
 
 using tigl::Vertex;
 
@@ -28,6 +29,7 @@ std::shared_ptr<GameObject> camera;
 
 double lastFrameTime = 0;
 std::list<std::shared_ptr<GameObject>> objects;
+std::list<std::shared_ptr<GameObject>> walls;
 
 
 int main(void)
@@ -65,6 +67,11 @@ void addGameObject(std::shared_ptr<GameObject> ob) {
 }
 
 
+void addWall(std::shared_ptr<GameObject> ob) {
+    walls.push_back(ob);
+}
+
+
 void init()
 {
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -73,18 +80,19 @@ void init()
             glfwSetWindowShouldClose(window, true);
     });
 
-    floorManager = new FloorManager(10, 10);
+    floorManager = new FloorManager(15, 15);
     camera = std::make_shared<GameObject>();
-    camera->position = glm::vec3(0,5,0);
+
+    auto center = floorManager->getCenterPoint();
+    camera->position = glm::vec3(-center.x,center.y + 8,-center.z);
     camera->addComponent(std::make_shared<PlayerComponent>());
     camera->addComponent(std::make_shared<CameraComponent>(window));
 
-    auto o = std::make_shared<GameObject>();
+ /*   auto o = std::make_shared<GameObject>();
     o->position = glm::vec3(0, 6, 0);
     o->addComponent(std::make_shared<PlaneComponent>(25,25, nullptr, 1));
-   
 
-    addGameObject(o);
+    addGameObject(o);*/
 
  
 
@@ -116,8 +124,11 @@ void update()
             tile->update(deltaTime);
         }
     }
-
     for (auto object : objects) {
+        object->update(deltaTime);
+    }
+
+    for (auto object : walls) {
         object->update(deltaTime);
     }
 
@@ -151,6 +162,10 @@ void draw()
     floorManager->draw();
 
     for (auto ob : objects) {
+        ob->draw();
+    }
+
+    for (auto ob : walls) {
         ob->draw();
     }
     
