@@ -7,12 +7,14 @@
 
 FloorTile::FloorTile(glm::vec3 position, int xMultiplier, int zMultiplier)
 {
+	srand(time(NULL));
 	object = std::make_shared<GameObject>();
 	position -= glm::vec3(0, 3 / 2, 0);
 	object->position = position;
 	object->addComponent(std::make_shared<BoxComponent>(glm::vec3(1 * xMultiplier,3, 1 * zMultiplier), nullptr, 1));
 	//object->addComponent(std::make_shared<GravityComponent>());
 	//object->addComponent(std::make_shared<PlaneComponent>(1 * xMultiplier,1 * zMultiplier,nullptr, 1));
+	
 }
 
 FloorTile::~FloorTile()

@@ -3,8 +3,10 @@
 #include <iostream>
 #include "main.h"
 #include "BoxComponent.h"
+#include "GameManager.h"
 
-FloorManager::FloorManager(int width, int height)
+FloorManager::FloorManager(int width, int height, GameManager* manager)
+	: gameManager(manager)
 {
 	int xMultiplier = 5;
 	int yMultiplier = 5;
@@ -20,7 +22,7 @@ FloorManager::FloorManager(int width, int height)
 				o->addComponent(std::make_shared<BoxComponent>(glm::vec3(1 * xMultiplier, 25, 1 * yMultiplier), nullptr, 1));
 				auto comp = o->getComponent<BoxComponent>();
 				comp->setColor(glm::vec4(1.f,1.f,1.f,1.f));
-				addWall(o);
+				gameManager->addWall(o);
 			}
 			else {
 				list.push_back(std::make_shared<FloorTile>(glm::vec3(widthIndex * xMultiplier, 0, heightIndex * yMultiplier), xMultiplier, yMultiplier));

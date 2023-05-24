@@ -72,6 +72,9 @@
     <ClCompile Include="GravityComponent.cpp">
       <Filter>components</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tigl.h">
@@ -116,14 +119,14 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>components\headers</Filter>
     </ClInclude>
-    <ClInclude Include="GravityComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ForceComponent.h">
       <Filter>components\headers</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityComponent.h">
+      <Filter>components\headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

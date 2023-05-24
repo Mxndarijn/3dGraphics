@@ -9,6 +9,7 @@
 #include "FloorTile.h"
 #include "PlaneComponent.h"
 #include "GravityComponent.h"
+#include "GameManager.h"
 
 using tigl::Vertex;
 
@@ -24,12 +25,10 @@ void draw();
 
 int playFieldWidth = 10, playFieldHeight = 10;
 
-FloorManager* floorManager;
+std::shared_ptr<GameManager> gameManager;
 std::shared_ptr<GameObject> camera;
 
 double lastFrameTime = 0;
-std::list<std::shared_ptr<GameObject>> objects;
-std::list<std::shared_ptr<GameObject>> walls;
 
 
 int main(void)
@@ -62,15 +61,6 @@ int main(void)
     return 0;
 }
 
-void addGameObject(std::shared_ptr<GameObject> ob) {
-    objects.push_back(ob);
-}
-
-
-void addWall(std::shared_ptr<GameObject> ob) {
-    walls.push_back(ob);
-}
-
 
 void init()
 {
@@ -80,10 +70,10 @@ void init()
             glfwSetWindowShouldClose(window, true);
     });
 
-    floorManager = new FloorManager(15, 15);
+    gameManager = std::make_shared<GameManager>();
     camera = std::make_shared<GameObject>();
 
-    auto center = floorManager->getCenterPoint();
+    auto center = gameManager->getFloorManager()->getCenterPoint();
     camera->position = glm::vec3(-center.x,center.y + 8,-center.z);
     camera->addComponent(std::make_shared<PlayerComponent>());
     camera->addComponent(std::make_shared<CameraComponent>(window));
@@ -119,18 +109,7 @@ void update()
 
     camera->update(deltaTime);
 
-    for (auto xTiles : floorManager->tiles) {
-        for (auto tile : xTiles) {
-            tile->update(deltaTime);
-        }
-    }
-    for (auto object : objects) {
-        object->update(deltaTime);
-    }
-
-    for (auto object : walls) {
-        object->update(deltaTime);
-    }
+    gameManager->update(deltaTime);
 
 }
 
@@ -152,22 +131,6 @@ void draw()
 
     tigl::shader->enableColor(true);
 
-    /*tigl::begin(GL_QUADS);
-    tigl::addVertex(Vertex::PCN(glm::vec3(-50, -1, -50), glm::vec4(1, 0, 0, 1), glm::vec3(0, 1, 0)));
-    tigl::addVertex(Vertex::PCN(glm::vec3(-50, -1, 50), glm::vec4(0, 1, 0, 1), glm::vec3(0, 1, 0)));
-    tigl::addVertex(Vertex::PCN(glm::vec3(50, -1, 50), glm::vec4(0, 0, 1, 1), glm::vec3(0, 1, 0)));
-    tigl::addVertex(Vertex::PCN(glm::vec3(50, -1, -50), glm::vec4(0, 0, 1, 1), glm::vec3(0, 1, 0)));
-    tigl::end();*/
-
-    floorManager->draw();
-
-    for (auto ob : objects) {
-        ob->draw();
-    }
-
-    for (auto ob : walls) {
-        ob->draw();
-    }
-    
-
+    gameManager->draw();
+   
 }
