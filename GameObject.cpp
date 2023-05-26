@@ -7,6 +7,7 @@
 
 GameObject::GameObject()
 {
+	position = glm::vec3(0, 0, 0);
 }
 
 
@@ -65,6 +66,31 @@ glm::vec3 GameObject::getScale()
 
 void GameObject::update(float elapsedTime)
 {
+	// Remove old components
+	if (!removeComponentTypes.empty()) {
+		for (const auto& removeType : removeComponentTypes)
+		{
+			auto it = components.begin();
+			while (it != components.end())
+			{
+				if (std::type_index(typeid(**it)) == removeType)
+				{
+					it = components.erase(it);
+				}
+				else
+				{
+					++it;
+				}
+			}
+		}
+		removeComponentTypes.clear();
+	}
+
 	for (auto& c : components)
 		c->update(elapsedTime);
+}
+
+std::shared_ptr<GameObject> GameObject::getSharedPointer()
+{
+	return shared_from_this();
 }

@@ -12,5 +12,9 @@ public:
 	void draw();
 	void update(float elapsedTime);
 	std::shared_ptr<GameObject> object;
+	inline glm::vec4 getCurrentColor() { return currentColor; };
+
+protected:
+	glm::vec4 currentColor;
 };
 

@@ -75,6 +75,12 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="YDeleteObjectComponent.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveToComponent.cpp">
+      <Filter>components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tigl.h">
@@ -127,6 +133,15 @@
     </ClInclude>
     <ClInclude Include="GravityComponent.h">
       <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveToComponent.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="YDeleteObjectComponent.h">
+      <Filter>components\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStatus.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

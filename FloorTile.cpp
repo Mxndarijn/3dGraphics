@@ -26,8 +26,8 @@ void FloorTile::generateNewColor()
 {
 	auto o = object->getComponent<BoxComponent>();
 	int random = rand() % color::colors.size();
-	glm::vec4 sel_elem = color::colors[random];
-	o->setColor(sel_elem);
+	currentColor = color::colors[random];
+	o->setColor(currentColor);
 
 }
 

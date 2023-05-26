@@ -28,7 +28,7 @@ int playFieldWidth = 10, playFieldHeight = 10;
 std::shared_ptr<GameManager> gameManager;
 std::shared_ptr<GameObject> camera;
 
-double lastFrameTime = 0;
+float lastFrameTime = 0;
 
 
 int main(void)
@@ -103,8 +103,8 @@ void init()
 
 void update()
 {
-    double currentFrameTime = glfwGetTime();
-    double deltaTime = currentFrameTime - lastFrameTime;
+    float currentFrameTime = glfwGetTime();
+    float deltaTime = currentFrameTime - lastFrameTime;
     lastFrameTime = currentFrameTime;
 
     camera->update(deltaTime);

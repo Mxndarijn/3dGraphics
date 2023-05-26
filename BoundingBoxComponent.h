@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "Component.h"
+
 class GameObject;
 
 class BoundingBoxComponent : public Component

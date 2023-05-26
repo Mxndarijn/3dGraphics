@@ -168,11 +168,13 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveToComponent.cpp" />
     <ClCompile Include="PlaneComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
+    <ClCompile Include="YDeleteObjectComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundingBoxComponent.h" />
@@ -186,12 +188,15 @@
     <ClInclude Include="ForceComponent.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="MoveToComponent.h" />
     <ClInclude Include="PlaneComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="YDeleteObjectComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

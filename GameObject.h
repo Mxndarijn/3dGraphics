@@ -6,16 +6,18 @@
 #include <memory>
 #include "BoundingBoxComponent.h"
 #include <iostream>
+#include "Component.h"
+#include <typeindex>
 
-class Component;
 class DrawComponent;
 class BoundingBoxComponent;
 
-class GameObject
+class GameObject: public std::enable_shared_from_this<GameObject>
 {
 	std::shared_ptr<DrawComponent> drawComponent;
 
 	std::list<std::shared_ptr<Component>> components;
+	std::vector<std::type_index> removeComponentTypes;
 
 public:
 	GameObject();
@@ -31,6 +33,7 @@ public:
 	std::list<std::shared_ptr<Component>> getComponents();
 	void update(float elapsedTime);
 	void draw(const glm::mat4 & = glm::mat4(1.0f));
+	std::shared_ptr<GameObject> getSharedPointer();
 	glm::vec3 getRotation();
 	glm::vec3 getPosition();
 	glm::vec3 getScale();
@@ -51,11 +54,7 @@ public:
 	template<class T>
 	void removeComponent()
 	{
-		components.remove_if([](Component* c)
-			{
-				T* t = dynamic_cast<T*>(c);
-				return t != nullptr;
-			});
+		removeComponentTypes.push_back(std::type_index(typeid(T));
 	}
 
 

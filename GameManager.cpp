@@ -15,19 +15,21 @@ GameManager::~GameManager()
 
 }
 
+
 void GameManager::update(double elapsedTime)
 {
 	timeLeft -= elapsedTime * 1000;
 	if (timeLeft < 0) {
-        std::cout << "New round started" << std::endl;
-		timeLeft = timeBetweenColors;
-		newRound();
-	}
-    for (auto xTiles : floorManager->tiles) {
-        for (auto tile : xTiles) {
-            tile->update(elapsedTime);
+        if (gameStatus == GameStatus::RESETTING) {
+            gameStatus = GameStatus::RUNNING;
+            timeLeft = timeBetweenColors;
         }
-    }
+        else {
+            floorManager->removeIncorrectFloorTiles(currentColor);
+            newRound();
+        }
+	}
+    floorManager->update(elapsedTime);
     for (auto object : objects) {
         object->update(elapsedTime);
     }
@@ -36,17 +38,29 @@ void GameManager::update(double elapsedTime)
         object->update(elapsedTime);
     }
 
+    for (auto object : removeObjects) {
+        objects.remove(object);
+        object.reset();
+    }
+
+    if (removeObjects.empty()) {
+        removeObjects.clear();
+    }
+   
 }
 
 void GameManager::newRound() 
 {
+
     generateNewColor();
 
     for (auto ob : walls) {
         auto drawComp = ob->getComponent<BoxComponent>();
         drawComp->setColor(currentColor);
-        ob->draw();
     }
+    gameStatus = GameStatus::RESETTING;
+    timeLeft = resetTime;
+
 
 
 }
@@ -59,6 +73,12 @@ std::shared_ptr<FloorManager> GameManager::getFloorManager()
 void GameManager::addGameObject(std::shared_ptr<GameObject> ob) {
     objects.push_back(ob);
 }
+
+void GameManager::removeGameObject(std::shared_ptr<GameObject> ob)
+{
+    removeObjects.push_back(ob);
+}
+
 
 
 void GameManager::addWall(std::shared_ptr<GameObject> ob) {
@@ -86,6 +106,8 @@ void GameManager::generateNewColor()
         newColor = color::colors[random];
     }
     currentColor = color::colors[random];
+
+    floorManager->generateNewColors();
 
 }
 
