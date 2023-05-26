@@ -17,7 +17,7 @@ class GameObject: public std::enable_shared_from_this<GameObject>
 	std::shared_ptr<DrawComponent> drawComponent;
 
 	std::list<std::shared_ptr<Component>> components;
-	std::vector<std::type_index> removeComponentTypes;
+	std::list<std::type_index> removeComponentTypes;
 
 public:
 	GameObject();
@@ -54,7 +54,7 @@ public:
 	template<class T>
 	void removeComponent()
 	{
-		removeComponentTypes.push_back(std::type_index(typeid(T));
+		removeComponentTypes.push_back(std::type_index(typeid(T)));
 	}
 
 

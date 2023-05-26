@@ -27,7 +27,7 @@ public:
 
 protected:
 	double timeBetweenColors = 5000;
-	double resetTime = 5000;
+	double resetTime = 6000;
 	double timeLeft = timeBetweenColors * 2;
 	glm::vec4 currentColor;
 	std::list<std::shared_ptr<GameObject>> objects;
