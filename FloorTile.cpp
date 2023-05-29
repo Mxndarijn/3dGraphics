@@ -3,15 +3,21 @@
 #include <iostream>
 #include "Color.h"
 #include "BoxComponent.h"
+#include <glm/gtc/matrix_transform.hpp>
 #include "GravityComponent.h"
 
-FloorTile::FloorTile(glm::vec3 position, int xMultiplier, int zMultiplier)
+FloorTile::FloorTile(glm::vec3 position, float xMultiplier, float zMultiplier)
 {
 	srand(time(NULL));
 	object = std::make_shared<GameObject>();
-	position -= glm::vec3(0, 3 / 2, 0);
+	position -= glm::vec3(0, floorHeight / 2, 0);
 	object->position = position;
-	object->addComponent(std::make_shared<BoxComponent>(glm::vec3(1 * xMultiplier,3, 1 * zMultiplier), nullptr, 1));
+	glm::vec3 size = glm::vec3(1 * xMultiplier, floorHeight, 1 * zMultiplier);
+	//std::cout << "Created: " << object->position.x << " " << object->position.y << " " << object->position.z << " Size: " << size.x << " " << size.y << " " << size.z << std::endl;
+	object->addComponent(std::make_shared<BoxComponent>(size, nullptr, 1));
+	object->addComponent(std::make_shared<BoundingBoxComponent>(size * -0.5f, size * 0.5f));
+
+	
 	//object->addComponent(std::make_shared<GravityComponent>());
 	//object->addComponent(std::make_shared<PlaneComponent>(1 * xMultiplier,1 * zMultiplier,nullptr, 1));
 	

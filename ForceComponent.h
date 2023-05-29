@@ -13,7 +13,7 @@ public:
 
     virtual void update(float elapsedTime) override;
 
-    void addFore(glm::vec3 force);
+    void addForce(glm::vec3 force);
     void multiplyForce(glm::vec3 force);
 protected:
     glm::vec3 forces;

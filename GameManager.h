@@ -7,12 +7,15 @@
 #include "Color.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include "GameStatus.h"
+#include <vector>
+#include "Texture.h"
+#include "ObjModel.h"
 
 
 class GameManager
 {
 public:
-	GameManager();
+	GameManager(std::shared_ptr<GameObject> camera);
 	~GameManager();
 
 	void update(double elapsedTime);
@@ -22,6 +25,12 @@ public:
 	void addWall(std::shared_ptr<GameObject> ob);
 	void draw();
 	void generateNewColor();
+	inline std::list<std::shared_ptr<GameObject>> getWalls() {
+		return walls;
+	}
+	inline std::list<std::shared_ptr<GameObject>> getObjects() {
+		return objects;
+	}
 
 	std::shared_ptr<FloorManager> getFloorManager();
 
@@ -35,5 +44,10 @@ protected:
 	std::list<std::shared_ptr<GameObject>> removeObjects;
 	std::shared_ptr<FloorManager> floorManager;
 	GameStatus gameStatus;
+	std::vector<std::shared_ptr<Texture>> textures;
+	std::vector<std::shared_ptr<ObjModel>> models;
+	std::shared_ptr<GameObject> camera;
+	std::shared_ptr<GameObject> heart;
+	bool hasExtraLife;
 };
 

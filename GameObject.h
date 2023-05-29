@@ -2,19 +2,20 @@
 
 #include <list>
 #include <glm/glm.hpp>
-#include <list>
 #include <memory>
 #include "BoundingBoxComponent.h"
 #include <iostream>
 #include "Component.h"
 #include <typeindex>
+#include "ForceComponent.h"
+#include <iostream>
 
 class DrawComponent;
-class BoundingBoxComponent;
 
 class GameObject: public std::enable_shared_from_this<GameObject>
 {
 	std::shared_ptr<DrawComponent> drawComponent;
+	std::shared_ptr<ForceComponent> forceComponent;
 
 	std::list<std::shared_ptr<Component>> components;
 	std::list<std::type_index> removeComponentTypes;
@@ -33,7 +34,11 @@ public:
 	std::list<std::shared_ptr<Component>> getComponents();
 	void update(float elapsedTime);
 	void draw(const glm::mat4 & = glm::mat4(1.0f));
+	void removeDrawComponent();
 	std::shared_ptr<GameObject> getSharedPointer();
+	inline std::shared_ptr<ForceComponent> getForceComponent() {
+		return forceComponent;
+	}
 	glm::vec3 getRotation();
 	glm::vec3 getPosition();
 	glm::vec3 getScale();
@@ -44,6 +49,10 @@ public:
 	{
 		for (auto c : components)
 		{
+			if (!c) {
+				std::cout << "Invalid component" << std::endl;
+				continue;
+			}
 			std::shared_ptr<T> t = std::dynamic_pointer_cast<T>(c);
 			if (t)
 				return t;

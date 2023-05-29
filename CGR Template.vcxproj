@@ -159,6 +159,7 @@
     <ClCompile Include="BoundingBoxComponent.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
     <ClCompile Include="FloorManager.cpp" />
@@ -168,7 +169,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="MoveToComponent.cpp" />
+    <ClCompile Include="ObjModel.cpp" />
     <ClCompile Include="PlaneComponent.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -180,6 +183,7 @@
     <ClInclude Include="BoundingBoxComponent.h" />
     <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="DrawComponent.h" />
@@ -190,7 +194,9 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameStatus.h" />
     <ClInclude Include="GravityComponent.h" />
+    <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="MoveToComponent.h" />
+    <ClInclude Include="ObjModel.h" />
     <ClInclude Include="PlaneComponent.h" />
     <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="stb_image.h" />

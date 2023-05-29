@@ -15,16 +15,15 @@ public:
 
 	FloorManager(int width, int heigt, GameManager* manager);
 	~FloorManager();
-	void draw();
-	void update(float deltaTime);
 	void removeIncorrectFloorTiles(glm::vec4 color);
 	glm::vec3 getCenterPoint();
 
 	void generateNewColors();
-protected:
+public:
 	GameManager* gameManager;
-	int xMultiplier = 5;
-	int yMultiplier = 5;
+	int xMultiplier = 8;
+	int yMultiplier = 8;
+	float boxHeight = 25;
 
 };
 

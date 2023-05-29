@@ -2,12 +2,31 @@
 #include "FloorTile.h"
 #include "BoxComponent.h"
 #include <iostream>
+#include "ModelComponent.h"
+#include "main.h"
 
-GameManager::GameManager()
+GameManager::GameManager(std::shared_ptr<GameObject> camera)
+    : camera(camera)
 {
-	floorManager = std::make_shared<FloorManager>(15, 15, this);
+    int xTilesLength = 15;
+    int zTilesLength = 15;
+    hasExtraLife = true;
+
+	floorManager = std::make_shared<FloorManager>(xTilesLength, zTilesLength, this);
     srand(time(NULL));
 	newRound();
+
+    models.push_back(std::make_shared<ObjModel>("resources/broken_heart/gebrokenhart.obj"));
+    models.push_back(std::make_shared<ObjModel>("resources/heart/heelhart.obj"));
+
+    auto center = floorManager->getCenterPoint();
+
+    heart = std::make_shared<GameObject>();
+    heart->position = glm::vec3(center.x, center.y + 12, center.z - (floorManager->yMultiplier * (zTilesLength - 2)) / 2);
+    heart->addComponent(std::make_shared<ModelComponent>(models[1]));
+    heart->rotation.x = glm::radians(90.f);
+    heart->scale *= 6;
+    addGameObject(heart);
 }
 
 GameManager::~GameManager()
@@ -29,7 +48,6 @@ void GameManager::update(double elapsedTime)
             newRound();
         }
 	}
-    floorManager->update(elapsedTime);
     for (auto object : objects) {
         object->update(elapsedTime);
     }
@@ -45,6 +63,17 @@ void GameManager::update(double elapsedTime)
 
     if (removeObjects.empty()) {
         removeObjects.clear();
+    }
+    if (hasExtraLife) {
+        int teleportBackTreshhold = -50;
+        if (camera->position.y < teleportBackTreshhold) {
+            hasExtraLife = false;
+            heart->removeComponent<ModelComponent>();
+            heart->removeDrawComponent();
+            heart->addComponent(std::make_shared<ModelComponent>(models[0]));
+            auto center = getFloorManager()->getCenterPoint();
+            camera->position = glm::vec3(center.x, center.y + 12, center.z);
+        }
     }
    
 }
@@ -87,7 +116,6 @@ void GameManager::addWall(std::shared_ptr<GameObject> ob) {
 
 void GameManager::draw()
 {
-    floorManager->draw();
     for (auto ob : objects) {
         ob->draw();
     }

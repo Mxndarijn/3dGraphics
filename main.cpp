@@ -10,6 +10,11 @@
 #include "PlaneComponent.h"
 #include "GravityComponent.h"
 #include "GameManager.h"
+#include "BoundingBoxComponent.h"
+#include "CollisionComponent.h"
+#include "ObjModel.h"
+#include "Texture.h"
+#include "ModelComponent.h"
 
 using tigl::Vertex;
 
@@ -64,25 +69,24 @@ int main(void)
 
 void init()
 {
+    std::cout << "Init" << std::endl;
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         if (key == GLFW_KEY_ESCAPE)
             glfwSetWindowShouldClose(window, true);
     });
 
-    gameManager = std::make_shared<GameManager>();
     camera = std::make_shared<GameObject>();
+    gameManager = std::make_shared<GameManager>(camera);
 
     auto center = gameManager->getFloorManager()->getCenterPoint();
-    camera->position = glm::vec3(-center.x,center.y + 8,-center.z);
+    camera->position = glm::vec3(center.x,center.y +12,center.z);
     camera->addComponent(std::make_shared<PlayerComponent>());
     camera->addComponent(std::make_shared<CameraComponent>(window));
+    camera->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2,-8,-2), glm::vec3(2,0,2)));
+    camera->addComponent(std::make_shared<CollisionComponent>(gameManager));
+    camera->addComponent(std::make_shared<GravityComponent>());
 
- /*   auto o = std::make_shared<GameObject>();
-    o->position = glm::vec3(0, 6, 0);
-    o->addComponent(std::make_shared<PlaneComponent>(25,25, nullptr, 1));
-
-    addGameObject(o);*/
 
  
 
@@ -130,6 +134,8 @@ void draw()
     tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
     tigl::shader->enableColor(true);
+
+    glEnable(GL_DEPTH_TEST);
 
     gameManager->draw();
    

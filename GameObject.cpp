@@ -2,23 +2,33 @@
 #include "DrawComponent.h"
 #include "tigl.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "BoundingBoxComponent.h"
 
 
 
 GameObject::GameObject()
 {
 	position = glm::vec3(0, 0, 0);
+	forceComponent = std::make_shared<ForceComponent>();
+	forceComponent->setGameObject(this);
 }
 
 
 GameObject::~GameObject()
 {
 }
-
+ 
 void GameObject::addComponent(std::shared_ptr<Component> component)
 {
 	component->setGameObject(this);
 	component->init();
+
+	/*if (forceComponent == nullptr) {
+		forceComponent = std::dynamic_pointer_cast<ForceComponent>(component);
+		if (forceComponent) {
+			return;
+		}
+	}*/
 	components.push_back(component);
 
 	if (drawComponent == nullptr) {
@@ -67,6 +77,7 @@ void GameObject::update(float elapsedTime)
 {
 	// Remove old components
 	if (!removeComponentTypes.empty()) {
+
 		for (const auto& removeType : removeComponentTypes)
 		{
 			auto it = components.begin();
@@ -87,9 +98,15 @@ void GameObject::update(float elapsedTime)
 
 	for (auto& c : components)
 		c->update(elapsedTime);
+
+	forceComponent->update(elapsedTime);
 }
 
 std::shared_ptr<GameObject> GameObject::getSharedPointer()
 {
 	return shared_from_this();
+}
+
+void GameObject::removeDrawComponent() {
+	drawComponent = nullptr;
 }
