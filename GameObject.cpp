@@ -22,13 +22,6 @@ void GameObject::addComponent(std::shared_ptr<Component> component)
 {
 	component->setGameObject(this);
 	component->init();
-
-	/*if (forceComponent == nullptr) {
-		forceComponent = std::dynamic_pointer_cast<ForceComponent>(component);
-		if (forceComponent) {
-			return;
-		}
-	}*/
 	components.push_back(component);
 
 	if (drawComponent == nullptr) {

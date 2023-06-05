@@ -20,12 +20,11 @@ void PlayerComponent::move(float angle, float fac, float elapsedTime)
 		(float)cos(gameObject->rotation.y + glm::radians(angle)) * fac * speed, 
 		0,
 		(float)sin(gameObject->rotation.y + glm::radians(angle)) * fac * speed));
-	//forceComponent->addForce((float)sin(gameObject->rotation.y + glm::radians(angle)) * fac * speed * elapsedTime);
 }
 
 void PlayerComponent::update(float elapsedTime)
-{
-
+{	
+	// First value is degrees, second one speed.
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		move(-90, 0.05f, elapsedTime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

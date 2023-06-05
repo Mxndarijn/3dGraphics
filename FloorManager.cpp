@@ -20,9 +20,11 @@ FloorManager::FloorManager(int width, int height, GameManager* manager)
 			if (widthIndex == 0 || heightIndex == 0 || widthIndex + 1 == width || heightIndex + 1 == height) {
 				auto o = std::make_shared<GameObject>();
 				o->position = glm::vec3(widthIndex * xMultiplier, wallHeight / 2, heightIndex * yMultiplier);
-				o->addComponent(std::make_shared<BoxComponent>(glm::vec3(1 * xMultiplier, wallHeight, 1 * yMultiplier), nullptr, 1));
+				o->addComponent(std::make_shared<BoxComponent>(glm::vec3(xMultiplier, wallHeight, yMultiplier), nullptr, 1));
+				//Calulate min and max Bounds
 				o->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-1 * xMultiplier / 2, -wallHeight / 2, -1 * yMultiplier / 2), glm::vec3(1 * xMultiplier / 2, wallHeight / 2, 1 * yMultiplier / 2)));
 				auto comp = o->getComponent<BoxComponent>();
+				// Set color to black.
 				comp->setColor(glm::vec4(1.f,1.f,1.f,1.f));
 				gameManager->addWall(o);
 			}
@@ -51,8 +53,9 @@ void FloorManager::removeIncorrectFloorTiles(glm::vec4 color)
 		for (auto tile : xTiles) {
 			if (tile->getCurrentColor() != color) {
 				tile->object->addComponent(std::make_shared<GravityComponent>());
+				// Delete object when it reaches -100
 				tile->object->addComponent(std::make_shared<YDeleteObjectComponent>(-100, gameManager));
-
+				// Set position to 100 y
 				auto pos = glm::vec3(tile->object->position.x, 100, tile->object->position.z);
 				auto ob = std::make_shared<FloorTile>(pos, xMultiplier, yMultiplier);
 				std::thread t([ob](){

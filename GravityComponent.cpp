@@ -16,7 +16,7 @@ void GravityComponent::update(float elapsedTime)
 	if (forceComponent == nullptr) {
 		std::cout << "No force component found" << std::endl;
 	} else{
-		forceComponent->addForce(glm::vec3(0, -3, 0)); // 9.81
+		forceComponent->addForce(glm::vec3(0, -3, 0)); // Voeg een kracht van -3 toe op een object.
 	}
 }
 

@@ -37,11 +37,11 @@ void ForceComponent::update(float elapsedTime)
 		newPos = pos;
 
 		// Loop voor elk van de assen x, y, z
-		for (int axis = 0; axis < 3; ++axis) {
+		for (int axis = 0; axis < 3; ++axis) { // 3 for total Axis, X, Y, Z
 			float& remainingAxisForce = remainingForces[axis];
 			float axisDirection = glm::sign(remainingAxisForce);
 
-			while (std::abs(remainingAxisForce) > 1) {
+			while (std::abs(remainingAxisForce) > 1) { // Zolang er krachten over zijn
 				glm::vec3 tempPos = newPos;
 				tempPos[axis] += remainingAxisForce * elapsedTime;
 				canMove = collisionComponent->canMoveTo(tempPos, boundingBoxComponent);

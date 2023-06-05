@@ -22,6 +22,7 @@ GameManager::GameManager(std::shared_ptr<GameObject> camera)
     auto center = floorManager->getCenterPoint();
 
     heart = std::make_shared<GameObject>();
+    // Set heart to wall position, y + 12
     heart->position = glm::vec3(center.x, center.y + 12, center.z - (floorManager->yMultiplier * (zTilesLength - 2)) / 2);
     heart->addComponent(std::make_shared<ModelComponent>(models[1]));
     heart->rotation.x = glm::radians(90.f);
@@ -65,6 +66,7 @@ void GameManager::update(double elapsedTime)
         removeObjects.clear();
     }
     if (hasExtraLife) {
+        // Teleport player back when it reaches -50
         int teleportBackTreshhold = -50;
         if (camera->position.y < teleportBackTreshhold) {
             hasExtraLife = false;

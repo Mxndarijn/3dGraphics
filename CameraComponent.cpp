@@ -27,7 +27,10 @@ void CameraComponent::update(float elapsedTime)
 
 	float tempX = gameObject->rotation.x - (float)(lastY - y) / 100.f;
 
-	if (tempX < 1.4f && tempX > -1.0f)
+	auto minWatchHeight = -1.f;
+	auto maxWatchHeight = 1.4f;
+
+	if (tempX < maxWatchHeight && tempX > minWatchHeight)
 		gameObject->rotation.x = tempX;
 	gameObject->rotation.y -= (float)(lastX - x) / 100.f;
 

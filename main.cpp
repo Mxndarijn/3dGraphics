@@ -80,16 +80,18 @@ void init()
     gameManager = std::make_shared<GameManager>(camera);
 
     auto center = gameManager->getFloorManager()->getCenterPoint();
+    // Set camera to center + y 12
     camera->position = glm::vec3(center.x,center.y +12,center.z);
     camera->addComponent(std::make_shared<PlayerComponent>());
     camera->addComponent(std::make_shared<CameraComponent>(window));
+    // Create bounding box around player
     camera->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2,-8,-2), glm::vec3(2,0,2)));
     camera->addComponent(std::make_shared<CollisionComponent>(gameManager));
     camera->addComponent(std::make_shared<GravityComponent>());
 
 
  
-
+    // Enable  Shaders
     glEnable(GL_DEPTH_TEST);
     tigl::shader->enableLighting(true);
     tigl::shader->setLightCount(1);
@@ -119,6 +121,7 @@ void update()
 
 void draw()
 {
+    // Default
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
