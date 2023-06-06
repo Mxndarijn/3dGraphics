@@ -12,7 +12,7 @@
 #include "ObjModel.h"
 
 
-class GameManager
+class GameManager: std::enable_shared_from_this<GameObject>
 {
 public:
 	GameManager(std::shared_ptr<GameObject> camera);
@@ -30,6 +30,10 @@ public:
 	}
 	inline std::list<std::shared_ptr<GameObject>> getObjects() {
 		return objects;
+	}
+
+	inline std::vector<std::shared_ptr<ObjModel>> getModels() {
+		return models;
 	}
 
 	std::shared_ptr<FloorManager> getFloorManager();

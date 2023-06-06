@@ -81,13 +81,23 @@ void init()
 
     auto center = gameManager->getFloorManager()->getCenterPoint();
     // Set camera to center + y 12
-    camera->position = glm::vec3(center.x,center.y +12,center.z);
+    camera->position = glm::vec3(center.x,center.y +50,center.z);
     camera->addComponent(std::make_shared<PlayerComponent>());
     camera->addComponent(std::make_shared<CameraComponent>(window));
     // Create bounding box around player
     camera->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2,-8,-2), glm::vec3(2,0,2)));
     camera->addComponent(std::make_shared<CollisionComponent>(gameManager));
     camera->addComponent(std::make_shared<GravityComponent>());
+
+    auto bulbasaur = std::make_shared<GameObject>();
+    bulbasaur->position = glm::vec3(center.x + 12, center.y + 12, center.z + 10);
+    bulbasaur->addComponent(std::make_shared<ModelComponent>(gameManager->getModels()[3]));
+    bulbasaur->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2, -0.5, -2), glm::vec3(2, 2, 2)));
+    bulbasaur->addComponent(std::make_shared<GravityComponent>());
+    bulbasaur->addComponent(std::make_shared<CollisionComponent>(gameManager));
+    bulbasaur->scale *= 5;
+
+    gameManager->addGameObject(bulbasaur);
 
 
  

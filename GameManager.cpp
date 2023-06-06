@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ModelComponent.h"
 #include "main.h"
+#include "CollisionComponent.h"
 
 GameManager::GameManager(std::shared_ptr<GameObject> camera)
     : camera(camera)
@@ -18,6 +19,10 @@ GameManager::GameManager(std::shared_ptr<GameObject> camera)
 
     models.push_back(std::make_shared<ObjModel>("resources/broken_heart/gebrokenhart.obj"));
     models.push_back(std::make_shared<ObjModel>("resources/heart/heelhart.obj"));
+   // models.push_back(std::make_shared<ObjModel>("resources/zeppelin/zeppelin.obj")); Too heavy
+    models.push_back(std::make_shared<ObjModel>("resources/plane/plane.obj"));
+    models.push_back(std::make_shared<ObjModel>("resources/bulbasaur/bulbasaur.obj"));
+    models.push_back(std::make_shared<ObjModel>("resources/bat/bat.obj"));
 
     auto center = floorManager->getCenterPoint();
 
@@ -27,7 +32,25 @@ GameManager::GameManager(std::shared_ptr<GameObject> camera)
     heart->addComponent(std::make_shared<ModelComponent>(models[1]));
     heart->rotation.x = glm::radians(90.f);
     heart->scale *= 6;
+
     addGameObject(heart);
+
+    auto zeppelin = std::make_shared<GameObject>();
+    zeppelin->position = glm::vec3(center.x, center.y + 7, center.z + (floorManager->yMultiplier * (zTilesLength - 2)) / 2 - 10);
+    zeppelin->addComponent(std::make_shared<ModelComponent>(models[2]));
+   // zeppelin->rotation.x = glm::radians(90.f);
+    zeppelin->scale *= 1;
+
+    addGameObject(zeppelin);
+
+    auto bat = std::make_shared<GameObject>();
+    bat->position = glm::vec3(center.x - 20, center.y + 10, center.z - 25);
+    bat->addComponent(std::make_shared<ModelComponent>(models[4]));
+    bat->rotation.z = glm::radians(-40.f);
+    bat->scale *= 3;
+
+    addGameObject(bat);
+
 }
 
 GameManager::~GameManager()

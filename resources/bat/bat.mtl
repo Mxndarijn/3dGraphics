@@ -1,0 +1,25 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Bat_body_mtl
+Ns 107.291185
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Merij\\Downloads\\bat\\textures\\Bat_body_mtl_baseColor.jpeg
+
+newmtl Bat_eye_mtl
+Ns 631.067961
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\Merij\\Downloads\\bat\\textures\\Bat_eye_mtl_baseColor.jpeg
+map_Ke C:\\Users\\Merij\\Downloads\\bat\\textures\\Bat_eye_mtl_baseColor.jpeg
