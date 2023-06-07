@@ -39,6 +39,7 @@ public:
 	std::shared_ptr<FloorManager> getFloorManager();
 
 protected:
+	int round = 0;
 	double timeBetweenColors = 5000;
 	double resetTime = 6000;
 	double timeLeft = timeBetweenColors * 2;

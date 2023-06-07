@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ModelComponent.h"
 #include "main.h"
+#include <fstream>
 #include "CollisionComponent.h"
 
 GameManager::GameManager(std::shared_ptr<GameObject> camera)
@@ -61,6 +62,8 @@ GameManager::~GameManager()
 
 void GameManager::update(double elapsedTime)
 {
+
+
 	timeLeft -= elapsedTime * 1000;
 	if (timeLeft < 0) {
         if (gameStatus == GameStatus::RESETTING) {
@@ -88,10 +91,10 @@ void GameManager::update(double elapsedTime)
     if (removeObjects.empty()) {
         removeObjects.clear();
     }
-    if (hasExtraLife) {
+    int teleportBackTreshhold = -50;
+    if (camera->position.y < teleportBackTreshhold) {
         // Teleport player back when it reaches -50
-        int teleportBackTreshhold = -50;
-        if (camera->position.y < teleportBackTreshhold) {
+        if (hasExtraLife) {
             hasExtraLife = false;
             heart->removeComponent<ModelComponent>();
             heart->removeDrawComponent();
@@ -99,13 +102,43 @@ void GameManager::update(double elapsedTime)
             auto center = getFloorManager()->getCenterPoint();
             camera->position = glm::vec3(center.x, center.y + 12, center.z);
         }
+        else {
+            auto fileName = "scores.txt";
+            std::vector<std::string> scores;
+            std::ifstream file(fileName);
+            if (file.is_open()) {
+                std::string score; 
+                while (file >> score) {
+                    scores.push_back(score);
+                }
+                file.close();
+            }
+            else {
+                std::cout << "Could not load scores. Maybe there arent any.";
+            }
+            scores.push_back(std::to_string(round));
+
+
+
+            std::ofstream outputFile(fileName);
+            if (outputFile.is_open()) {
+                for (const auto& score : scores) {
+                    outputFile << score << std::endl;
+                }
+                outputFile.close();
+            }
+            else {
+                std::cout << "Could not save scores.";
+            }
+            exit(0);
+        }
     }
    
 }
 
 void GameManager::newRound() 
 {
-
+    round += 1;
     generateNewColor();
 
     for (auto ob : walls) {

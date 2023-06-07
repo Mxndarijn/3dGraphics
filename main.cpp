@@ -90,9 +90,9 @@ void init()
     camera->addComponent(std::make_shared<GravityComponent>());
 
     auto bulbasaur = std::make_shared<GameObject>();
-    bulbasaur->position = glm::vec3(center.x + 12, center.y + 12, center.z + 10);
+    bulbasaur->position = glm::vec3(center.x + 10, center.y + 30, center.z + 5);
     bulbasaur->addComponent(std::make_shared<ModelComponent>(gameManager->getModels()[3]));
-    bulbasaur->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2, -0.5, -2), glm::vec3(2, 2, 2)));
+    bulbasaur->addComponent(std::make_shared<BoundingBoxComponent>(glm::vec3(-2, -0.5, -1), glm::vec3(1, 2, 2)));
     bulbasaur->addComponent(std::make_shared<GravityComponent>());
     bulbasaur->addComponent(std::make_shared<CollisionComponent>(gameManager));
     bulbasaur->scale *= 5;
