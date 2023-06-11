@@ -8,6 +8,7 @@
 #include "MoveToComponent.h"
 #include <thread>
 
+// FloorManager manages the Floor, ensures that tiles get updated with colors.
 FloorManager::FloorManager(int width, int height, GameManager* manager)
 	: gameManager(manager)
 {
@@ -27,6 +28,7 @@ FloorManager::FloorManager(int width, int height, GameManager* manager)
 				// Set color to black.
 				comp->setColor(glm::vec4(1.f,1.f,1.f,1.f));
 				gameManager->addWall(o);
+				std::cout << "Wall at: " << o->position.x << " , " << o->position.y << " , " << o->position.z << std::endl;
 			}
 			else {
 				auto tile = std::make_shared<FloorTile>(glm::vec3(widthIndex * xMultiplier, 0, heightIndex * yMultiplier), xMultiplier, yMultiplier);

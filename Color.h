@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+// Default Colors.
 namespace color { // RGB to 0-1 range
 	const glm::vec4 PURPLE = glm::vec4(104.f / 255, 31.f / 255, 112.f / 255,1);
 	const glm::vec4 BLUE = glm::vec4(13.f / 255, 13.f / 255, 181.f / 255,1);

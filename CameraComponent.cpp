@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include <iostream>
 
+//Camera Component, includes moving with the mouse.
 CameraComponent::~CameraComponent()
 {
 }

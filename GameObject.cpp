@@ -5,7 +5,7 @@
 #include "BoundingBoxComponent.h"
 
 
-
+// Default GameObject class.
 GameObject::GameObject()
 {
 	position = glm::vec3(0, 0, 0);

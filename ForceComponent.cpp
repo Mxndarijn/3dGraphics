@@ -4,10 +4,11 @@
 #include "CollisionComponent.h"
 #include <cmath>
 
-
+// Force componets, other componets add a force, then the force will calculate in which direction is should go. 
+// And also checks collision
 ForceComponent::ForceComponent()
 {
-	forces = glm::vec3(0, 0, 0);
+	forces = glm::vec3(0); // set default force to 0
 }
 
 ForceComponent::~ForceComponent()

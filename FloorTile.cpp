@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "GravityComponent.h"
 
+// Floortile is a class that holds a GameObject, and floorTile can manipulate it with colors.
 FloorTile::FloorTile(glm::vec3 position, float xMultiplier, float zMultiplier)
 {
 	srand(time(NULL));

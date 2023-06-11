@@ -6,6 +6,8 @@
 
 using tigl::Vertex;
 
+//Plane component
+
 PlaneComponent::PlaneComponent(float width, float height, Texture* texture, int textureMultiValue)
 	: textureMulti(textureMultiValue), width(width), height(height), texture(texture)
 {

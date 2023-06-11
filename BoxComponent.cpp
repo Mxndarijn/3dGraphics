@@ -6,6 +6,7 @@
 
 using tigl::Vertex;
 
+//Box component to draw it in 3d
 BoxComponent::BoxComponent(glm::vec3 transform, Texture* texture, int textureMultiValue)
     : transform(transform), texture(texture), textureMulti(textureMultiValue)
 {
@@ -16,6 +17,7 @@ BoxComponent::~BoxComponent()
 {
 }
 
+//Draw box with a texture
 void BoxComponent::drawBoxTexture()
 {
 
@@ -63,6 +65,7 @@ void BoxComponent::drawBoxTexture()
     tigl::shader->enableTexture(false);
 }
 
+// Draw box with a Color
 void BoxComponent::drawBoxColor()
 {
     tigl::shader->enableColor(true);

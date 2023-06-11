@@ -1,5 +1,6 @@
 #include "CollisionComponent.h"
 
+//Collision component, this component checks that is 
 CollisionComponent::CollisionComponent(std::shared_ptr <GameManager> manager)
 	: gameManager(manager)
 {

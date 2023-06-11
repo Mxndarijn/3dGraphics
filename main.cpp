@@ -36,6 +36,7 @@ std::shared_ptr<GameObject> camera;
 float lastFrameTime = 0;
 
 
+//Create Window
 int main(void)
 {
     if (!glfwInit())
@@ -66,7 +67,9 @@ int main(void)
     return 0;
 }
 
-
+// Creates camera and Gamemanager.
+// Adds default objects.
+// Starts shadow.
 void init()
 {
     std::cout << "Init" << std::endl;
@@ -101,7 +104,7 @@ void init()
 
 
  
-    // Enable  Shaders
+    // Enable Lightning
     glEnable(GL_DEPTH_TEST);
     tigl::shader->enableLighting(true);
     tigl::shader->setLightCount(1);

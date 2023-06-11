@@ -7,6 +7,9 @@
 #include <fstream>
 #include "CollisionComponent.h"
 
+// GameManagers make the game.
+// Then starts new rounds and saves it to the file.
+// In this class all the objects will be stored.
 GameManager::GameManager(std::shared_ptr<GameObject> camera)
     : camera(camera)
 {
@@ -29,7 +32,8 @@ GameManager::GameManager(std::shared_ptr<GameObject> camera)
 
     heart = std::make_shared<GameObject>();
     // Set heart to wall position, y + 12
-    heart->position = glm::vec3(center.x, center.y + 12, center.z - (floorManager->yMultiplier * (zTilesLength - 2)) / 2);
+ //   heart->position = glm::vec3(center.x, center.y + 12, center.z - (floorManager->yMultiplier * (zTilesLength - 2)) / 2);
+    heart->position = glm::vec3(center.x, center.y + 12, center.z + 30);
     heart->addComponent(std::make_shared<ModelComponent>(models[1]));
     heart->rotation.x = glm::radians(90.f);
     heart->scale *= 6;

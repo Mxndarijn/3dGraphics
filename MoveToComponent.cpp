@@ -1,6 +1,8 @@
 #include "MoveToComponent.h"
 #include <iostream>
 
+
+//Moveto component. Does not work with forces.
 MoveToComponent::MoveToComponent(glm::vec3 target) :
 	target(target)
 {
@@ -20,19 +22,5 @@ void MoveToComponent::update(float elapsedTime)
 		glm::vec3 direction = glm::normalize(target - gameObject->position);
 		newPos = gameObject->position + direction * minDistanceTraveled;
 	}
-
-
 	gameObject->position = newPos;
-
-	//not needed.
-	//float angle = atan2(gameObject->position.z - target.z, gameObject->position.x - target.x);
-
-	//gameObject->rotation.y = 0.05f * angle + 0.95f * gameObject->rotation.y;
-
-	auto pos = gameObject->position;
-
-	if (glm::length(pos - target) < 0.01f) {
-		gameObject->position = target;
-		gameObject->removeComponent<MoveToComponent>();
-	}
 }

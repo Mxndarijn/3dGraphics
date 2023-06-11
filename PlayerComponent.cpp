@@ -4,7 +4,7 @@
 
 extern GLFWwindow* window;
 
-
+// Player component, makes sure the object responds to WASD
 PlayerComponent::PlayerComponent()
 {
 }

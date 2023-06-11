@@ -6,7 +6,9 @@
 #include <array>
 #include <algorithm>
 
-
+/*
+    BoundingBoxComponent, zorgt voor collision.
+*/
 BoundingBoxComponent::BoundingBoxComponent(glm::vec3 min, glm::vec3 max)
     : min(min), max(max)
 {
@@ -17,6 +19,7 @@ BoundingBoxComponent::~BoundingBoxComponent()
 {
 }
 
+// Methode om collision te checken met een andere GameObject dat ook een boundingBox heeft
 bool BoundingBoxComponent::collides(std::shared_ptr<GameObject> other)
 {
     auto boundingBoxComponent = other->getComponent<BoundingBoxComponent>();
@@ -39,6 +42,7 @@ bool BoundingBoxComponent::collides(std::shared_ptr<GameObject> other)
     return false;
 }
 
+// Corners van de kubus
 std::array<glm::vec3, 4> BoundingBoxComponent::getCubeCorners(glm::vec3 corner1, glm::vec3 corner2)
 {
     std::array<glm::vec3, 4> corners;
@@ -54,6 +58,7 @@ std::array<glm::vec3, 4> BoundingBoxComponent::getCubeCorners(glm::vec3 corner1,
     return corners;
 }
 
+//Check of een punt in een cube zit.
 bool BoundingBoxComponent::isPointInCube(glm::vec3 point, glm::vec3 corner1, glm::vec3 corner2)
 {
     glm::vec3 minBounds = glm::min(corner1, corner2);
